@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive File System</title>
+    <style>
+        #fileSystem, #modals {
+            padding: 20px;
+            margin-top: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        ul.tree {
+    list-style-type: none;
+}
+
+ul.tree ul {
+    margin-left: 20px;
+    padding-left: 0;
+}
+
+.tree-item {
+    position: relative;
+}
+
+.tree-item::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    height: 1px;
+    width: 20px;
+    background-color: #000;
+}
+
+.tree-item::after {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 0;
+    bottom: 50%;
+    width: 1px;
+    background-color: #000;
+}
+
+
+ul.tree {
+    list-style-type: none;
+    padding-left: 20px; 
+}
+
+.tree-item {
+    margin-left: 20px;
+    position: relative;
+}
+
+.tree-item:before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    height: 1px;
+    width: 20px;
+    background-color: #000;
+}
+
+.tree-item:after {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 0;
+    bottom: 50%;
+    width: 1px;
+    background-color: #000;
+}
+
+
+      
+    </style>
+</head>
+<body>
+    <h1>Interactive File System UI</h1>
+    <button onclick="showModal('folder')">Create Folder</button>
+    <button onclick="showModal('file')">Create File</button>
+    <button onclick="navigateUp()">Up One Level</button>
+    <button onclick="goToRootAndExpandAll()">Go to Root and Expand All</button>
+    <button onclick="toggleDetailedView()">Toggle Detailed View</button>
+
+    
+    <div id="currentPath">/</div>
+    <div id="fileSystem"></div>
+
+    <!-- Modal Structure -->
+    <div id="modals">
+        <div id="folderModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('folder')">&times;</span>
+                <p>Create a new folder:</p>
+                <input type="text" id="folderName" placeholder="Folder Name">
+                <button onclick="createItem('folder')">Create</button>
+            </div>
+        </div>
+
+        <div id="fileModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('file')">&times;</span>
+                <p>Create a new file:</p>
+                <input type="text" id="fileName" placeholder="File Name">
+                <button onclick="createItem('file')">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
